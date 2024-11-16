@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core">
+   <Dialog
+      id="addItemDialog"
+      title="Hello"
+      class  = "sapUiContentPadding">
+   	<content>
+   		<!--<VBox>
+	   		<Label text= "Header ID" labelFor  = "idHeaderID"/>
+	   		<Input id = "idHeaderID" value = " "/>
+	   	</VBox>-->
+	   	<VBox>
+	   		<Label text= "ID" labelFor  = "idID"/>
+	   		<Input id = "idID" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DocumentNumber" labelFor  = "idDocumentNumber"/>
+	   		<Input id = "idDocumentNumber" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Description" labelFor  = "idDescription"/>
+	   		<Input id = "idDescription" value = " "/>
+	   	</VBox>
+	   	<!--<VBox>
+	   		<Label text= "PlantText" labelFor  = "idPlantText"/>
+	   		<Input id = "idPlantText" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "RegionText" labelFor  = "idRegionText"/>
+	   		<Input id = "idRegionText" value = " "/>
+	   	</VBox>-->
+	   		<Label text="DocumentDate" labelFor="DP2"/>
+	   		<DatePicker
+					id="DP2"
+					value="{
+						'path':'/valueDP2',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					}"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+	   	<VBox>
+	   		<Label text= "Instance" labelFor  = "idInstance"/>
+	   		<Input id = "idInstance" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Version" labelFor  = "idVersion"/>
+	   		<Input id = "idVersion" value = " "/>
+	   	</VBox>
+	   	</content>
+	     <beginButton>
+		   	<Button 
+			 id = "addDialogButton"
+			 text  = "Add"
+			 press = ".onAddItem"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Emphasized"/>
+		 </beginButton>
+	    <endButton>
+		   	<Button 
+			 id = "closeDialogButton"
+			 text  = "Close"
+			 press = ".onCloseAddItemDialog"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </endButton>
+   	</Dialog>
+</core:FragmentDefinition>

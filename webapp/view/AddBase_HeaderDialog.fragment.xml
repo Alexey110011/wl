@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core">
+   <Dialog
+      id="addBase_HeaderDialog"
+      title="Hello"
+      class  = "sapUiContentPadding">
+   	<content>
+   		<VBox>
+	   		<Label text= "Header ID" labelFor  = "idHeaderIDH"/>
+	   		<Input id = "idHeaderIDH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DocumentNumber" labelFor  = "idDocumentNumberH"/>
+	   		<Input id = "idDocumentNumberH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Description" labelFor  = "idDescriptionH"/>
+	   		<Input id = "idDescriptionH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "PlantText" labelFor  = "idPlantTextH"/>
+	   		<Input id = "idPlantTextH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "RegionText" labelFor  = "idRegionTextH"/>
+	   		<Input id = "idRegionTextH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "CreatedBy" labelFor  = "idCreatedByH"/>
+	   		<Input id = "idCreatedByH" value = " "/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Version" labelFor  = "idVersionH"/>
+	   		<Input id = "idVersionH" value = " "/>
+	   	</VBox>
+	</content>
+	     <beginButton>
+		   	<Button 
+			 id = "addHeaderDialogButton"
+			 text  = "Add"
+			 press = ".onAdd_base_Header"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Emphasized"/>
+		 </beginButton>
+	    <endButton>
+		   	<Button 
+			 id = "closeHeaderDialogButton"
+			 text  = "Close"
+			 press = ".onCloseAddBase_HeaderDialog"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </endButton>
+   	</Dialog>
+</core:FragmentDefinition>

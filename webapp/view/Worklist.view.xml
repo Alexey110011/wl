@@ -1,0 +1,144 @@
+<mvc:View
+	controllerName="zjblessons.Worklist.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" />
+		</semantic:titleHeading>
+			
+		<semantic:content>
+		
+			<Table
+				id="table"
+				width="auto"
+				items="{
+						path: '/zjblessons_base_Headers',
+						sorter: {
+							path: 'DocumentDate',
+							descending: true
+						}
+					}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished="onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+						<ToolbarSpacer />
+						<Button 
+						id = "create_button"
+						text = "New tHeader"
+						type = "Emphasized"
+						 press = ".onOpenAddItemDialog"/>
+						 
+						 <Button 
+						id = "create_button1"
+						text = "New baseHeader"
+						type = "Emphasized"
+						 press = ".onOpenAddBase_HeaderDialog"/>
+						 
+						 <Button 
+						id = "onOpenModelTHeaders"
+						text = "OModel"
+						type = "Emphasized"
+						 press = ".onOpenModel"/>
+						 
+						 <!--<Button 
+						id = "onSubmitModel"
+						text = "OModeltHeaders"
+						type = "Emphasized"
+						 press = ".onSubmitModel"/>
+						 <Button 
+						id = "delete_button"
+						text = "Show Model"
+						type = "Emphasized"
+						 press = ".onShowModel"/>-->
+						 <!--<Button 
+						id = "onOpenModelBase_Headers"
+						text = "OModelBase_Headers"
+						type = "Emphasized"
+						 press = ".onOpenModelBase_Headers"/>-->
+						 
+						 <Button 
+						id = "onSubmitModelBase_Headers"
+						text = "OModelBase_Headers"
+						type = "Emphasized"
+						 press = ".onSubmitModelBase_Headers"/>
+						 
+						<SearchField
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn">
+						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>tableNameColumnTitle2}" id="nameColumnTwo"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>tableNameColumnTitle3}" id="nameColumnThree"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>tableNameColumnTitle4}" id="nameColumnFour"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>tableNameColumnTitle5}" id="nameColumnFive"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>tableNameColumnTitle6}" id="nameColumnSix"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press="onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{DocumentNumber}"/>
+							<Text
+								text="{DocumentDate}"/>
+							<Text
+								text="{PlantText}"/>
+							<Text
+								text="{RegionText}"/>
+							<Text
+								text="{Description}"/>
+							<Text
+								text="{Created}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
+<!--items="{
+					path: '/zjblessons_base_Headers',
+					sorter: {
+						path: 'DocumentDate',
+						descending: true
+					}
+				}"-->
