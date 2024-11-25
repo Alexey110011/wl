@@ -30,7 +30,7 @@
 	   		<Label text= "RegionText" labelFor  = "idRegionText"/>
 	   		<Input id = "idRegionText" value = " "/>
 	   	</VBox>-->
-	   		<Label text="DocumentDate" labelFor="DP2"/>
+	   		<!--<Label text="DocumentDate" labelFor="DP2"/>
 	   		<DatePicker
 					id="DP2"
 					value="{
@@ -41,7 +41,7 @@
 						}
 					}"
 					change="handleChange"
-					class="sapUiSmallMarginBottom"/>
+					class="sapUiSmallMarginBottom"/>-->
 	   	<VBox>
 	   		<Label text= "Instance" labelFor  = "idInstance"/>
 	   		<Input id = "idInstance" value = " "/>

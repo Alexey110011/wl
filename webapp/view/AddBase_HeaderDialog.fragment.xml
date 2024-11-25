@@ -39,7 +39,7 @@
 		   	<Button 
 			 id = "addHeaderDialogButton"
 			 text  = "Add"
-			 press = ".onAdd_base_Header"
+			 press = ".onAdd_base_Header1"
 			 class = "sapUiSmallMarginEnd"
 			 type = "Emphasized"/>
 		 </beginButton>

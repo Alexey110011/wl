@@ -3,13 +3,14 @@ sap.ui.define([
 		"zjblessons/Worklist/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
-		"sap/m/MessageBox", 
+		"sap/m/MessageBox",
 		"zjblessons/Worklist/model/formatter"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
 		MessageBox,
+		//customShareActions,
 		formatter
 	) {
 		"use strict";
@@ -33,7 +34,9 @@ sap.ui.define([
 				var iOriginalBusyDelay,
 					oViewModel = new JSONModel({
 						busy : true,
-						delay : 0
+						delay : 0,
+						//added
+						editMode : false
 					});
 
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
@@ -144,7 +147,6 @@ sap.ui.define([
 			}, 
 			
 				onDeleteObject :function(){
-					var oModel = this.getView().getModel()
 					console.log(this.getView().getBindingContext());
 					console.log(this.getView().getModel());
 					var oObject = this.getView().getBindingContext().getObject();
@@ -154,7 +156,6 @@ sap.ui.define([
 						onClose: function(sButton){
 							if(sButton===MessageBox.Action.OK){
 								this.onConfirmDeleteObject();
-								//this.onNavBack()
 							} else {
 								console.log("No")
 							}
@@ -166,14 +167,19 @@ sap.ui.define([
 				},
 				onConfirmDeleteObject : function (){
 					var oModel = this.getView().getModel()
+					var oViewModel = this.getView().getModel('objectView')
+					this.byId("page").setBusy(true)
 					oModel.remove(this.getView().getBindingContext().sPath);
-					oModel.submitChanges({success:this.successHandler, error:this.errorHandler});
-					//this.onNavBack()
+					oModel.submitChanges({success:this.successHandler(oModel), error:this.errorHandler});
+					this.onNavBack()
 				},
+				
 				onUpdateObject :function(){
 					var oModel = this.getView().getModel()
 					console.log(this.getView().getBindingContext());
-					console.log(this.getView().getModel());
+					var oViewModel = this.getModel("objectView")
+					oViewModel.setProperty('/editMode',true)
+					console.log("E",oViewModel.getProperty('oData'))
 					var oData = {
 						DocumentNumber:'20001',
 						Description:'text',
@@ -181,15 +187,17 @@ sap.ui.define([
 						RegionText:'New Region'
 					}
 					oModel.update(this.getView().getBindingContext().sPath,oData);
-					oModel.submitChanges({success:this.successHandler, error:this.errorHandler});
-					
 				},
-				successHandler :function(oModel){
+				
+				successHandler :function(){
 					console.log("Success")
+					this.byId("page").setBusy(false)
+					console.log(this.getView().getModel())
 				},
+				
 				errorHandler :function(){
-				//	var oModel = this.getView().getModel();
 					console.log("Error")
+					this.byId("page").setBusy(false)
 				}
 
 		});

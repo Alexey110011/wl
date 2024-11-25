@@ -1,5 +1,5 @@
-sap.ui.define([
-	] , function () {
+sap.ui.define(["sap/ui/core/format/DateFormat"
+	] , function (DateFormat) {
 		"use strict";
 
 		return {
@@ -15,6 +15,14 @@ sap.ui.define([
 					return "";
 				}
 				return parseFloat(sValue).toFixed(2);
+			},
+			dateFormat :function (date){
+				var oDateFormat = DateFormat.getDateInstance({pattern:'yyyy-MM-dd'});
+				/*if(!date){
+					return "";
+				}*/
+				//console.log(oDateFormat.format(date));
+				return oDateFormat.format(date); 
 			}
 
 		};

@@ -14,131 +14,119 @@
 		</semantic:titleHeading>
 			
 		<semantic:content>
-		
-			<Table
-				id="table"
-				width="auto"
-				items="{
-						path: '/zjblessons_base_Headers',
-						sorter: {
-							path: 'DocumentDate',
-							descending: true
-						}
-					}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished="onUpdateFinished">
-
-				<headerToolbar>
-					<Toolbar>
-						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
-						<ToolbarSpacer />
-						<Button 
-						id = "create_button"
-						text = "New tHeader"
-						type = "Emphasized"
-						 press = ".onOpenAddItemDialog"/>
-						 
-						 <Button 
-						id = "create_button1"
-						text = "New baseHeader"
-						type = "Emphasized"
-						 press = ".onOpenAddBase_HeaderDialog"/>
-						 
-						 <Button 
-						id = "onOpenModelTHeaders"
-						text = "OModel"
-						type = "Emphasized"
-						 press = ".onOpenModel"/>
-						 
-						 <!--<Button 
-						id = "onSubmitModel"
-						text = "OModeltHeaders"
-						type = "Emphasized"
-						 press = ".onSubmitModel"/>
-						 <Button 
-						id = "delete_button"
-						text = "Show Model"
-						type = "Emphasized"
-						 press = ".onShowModel"/>-->
-						 <!--<Button 
-						id = "onOpenModelBase_Headers"
-						text = "OModelBase_Headers"
-						type = "Emphasized"
-						 press = ".onOpenModelBase_Headers"/>-->
-						 
-						 <Button 
-						id = "onSubmitModelBase_Headers"
-						text = "OModelBase_Headers"
-						type = "Emphasized"
-						 press = ".onSubmitModelBase_Headers"/>
-						 
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search="onSearch"
-							width="auto">
-						</SearchField>
-					</Toolbar>
-				</headerToolbar>
-
-				<columns>
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableNameColumnTitle2}" id="nameColumnTwo"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableNameColumnTitle3}" id="nameColumnThree"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableNameColumnTitle4}" id="nameColumnFour"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableNameColumnTitle5}" id="nameColumnFive"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableNameColumnTitle6}" id="nameColumnSix"/>
-					</Column>
-				</columns>
-
+			<IconTabBar
+				id="idIconTabBar"
+				select=".onFilterSelect"
+				class="sapUiResponsiveContentPadding">
 				<items>
-					<ColumnListItem
-						type="Navigation"
-						press="onPress">
-						<cells>
-							<ObjectIdentifier
-								title="{DocumentNumber}"/>
-							<Text
-								text="{DocumentDate}"/>
-							<Text
-								text="{PlantText}"/>
-							<Text
-								text="{RegionText}"/>
-							<Text
-								text="{Description}"/>
-							<Text
-								text="{Created}"/>
-						</cells>
-					</ColumnListItem>
+					<IconTabFilter
+						showAll="true"
+						count="{/ProductCollectionStats/Counts/Total}"
+						text="All"
+						key="All" />
+					<IconTabSeparator />
+					<IconTabFilter
+						count="{/ProductCollectionStats/Counts/Weight/Ok}"
+						text="Deactivated"
+						key="Deactivated" />
 				</items>
-			</Table>
+				<content>
+					<Panel id = "container"></Panel>
+					<!--Удаляется таблица,созданная в XML-->
+					<!--<Table
+						id="table"
+						width="auto"
+						items="{
+								path: '/zjblessons_base_Headers',
+								sorter: {
+									path: 'DocumentDate',
+									descending: true
+								}
+							}"
+						noDataText="{worklistView>/tableNoDataText}"
+						busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+						growing="true"
+						growingScrollToLoad="true"
+						updateFinished="onUpdateFinished">
+						
+						<headerToolbar>
+							<Toolbar>
+								<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+								<ToolbarSpacer />
+								<Button 
+									id = "create_button1"
+									text = "Create"
+									type = "Emphasized"
+									press = ".onOpenAddBase_HeaderDialog"/>
+								<SearchField
+									id="searchField"
+									tooltip="{i18n>worklistSearchTooltip}"
+									search="onSearch"
+									width="auto">
+								</SearchField>
+							</Toolbar>
+						</headerToolbar>
+		
+						<columns>
+							<Column id="nameColumn">
+								<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableNameColumnTitle2}" id="nameColumnTwo"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableNameColumnTitle3}" id="nameColumnThree"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableNameColumnTitle4}" id="nameColumnFour"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableNameColumnTitle5}" id="nameColumnFive"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableNameColumnTitle6}" id="nameColumnSix"/>
+							</Column>
+							<Column>
+								<Text text="Switch version" id="switchVersionId"/>
+							</Column>
+						</columns>
+		
+						<items>
+							<ColumnListItem
+								type="Navigation"
+								press="onPress"
+							    highlight = "{={Version:'A'}?'Success':'Error'}">
+								<cells>
+									<ObjectIdentifier
+										title="{DocumentNumber}"/>
+									<Text
+										text="{path:'DocumentDate',
+										type:'sap.ui.model.type.Date',
+										formatOptions:{
+										pattern:'yyyy-MM-dd',
+										style:'medium'
+										}}"/>
+									<Text
+										text="{PlantText}"/>
+									<Text
+										text="{RegionText}"/>
+									<Text
+										text="{Description}"/>
+									<Text
+										text="{Created}"/>
+									<Switch state="true"
+											change  =".onChangeSwitch">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Switch>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>-->
+				</content>
+			</IconTabBar>
 		</semantic:content>
-
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
 	</semantic:SemanticPage>
 
 </mvc:View>
-<!--items="{
-					path: '/zjblessons_base_Headers',
-					sorter: {
-						path: 'DocumentDate',
-						descending: true
-					}
-				}"-->

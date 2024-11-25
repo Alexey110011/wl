@@ -2,7 +2,10 @@
 	controllerName="zjblessons.Worklist.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:semantic="sap.f.semantic"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:f= "sap.f.semantic.SemanticPage"
+	>
 
 	<semantic:SemanticPage
 		id="page"
@@ -10,30 +13,134 @@
 		toggleHeaderOnTitleClick="false"
 		busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
-		<Button 
-			id = "delete_button"
-			text = "Delete Object"
-			type = "Emphasized"
-			press = ".onDeleteObject"/>
-		<!--<Button 
-			id = "update_button"
-			text = "Update Object"
-			type = "Emphasized"
-		    press = ".onUpdateObject"/>-->
-		<semantic:titleHeading>
-			<Title text="{DocumentNumber}" />
-		</semantic:titleHeading>
 	
+		<semantic:titleHeading>
+			<Title text="{DocumentNumber}"/>
+		</semantic:titleHeading>
+			
 		<semantic:headerContent>
 			<ObjectNumber
 			/>
 		</semantic:headerContent>
+		
+		<semantic:deleteAction>
+			<semantic:DeleteAction
+				visible = "{={Version:'A'}?true:false}"
+				id = "delete_button"
+				press = ".onDeleteObject"
+			/>
+		</semantic:deleteAction>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-
+		<semantic:editAction>
+			<semantic:EditAction
+				id = "update_button"
+			    press = ".onUpdateObject"/>
+		</semantic:editAction>
+		
+		<semantic:titleCustomTextActions>
+			<Button 
+				id = "onOpenModelBase_Headers"
+				text = "Save"
+				type = "Emphasized"
+				press = ".onSave"
+				visible = "{=${objectView>/editMode}===true}"/>
+			<Button 
+				id = "onSubmitModelBase_Headers"
+				text = "Cancel"
+				type = "Emphasized"
+			    press = ".onCancel"
+			    visible = "{=${objectView>/editMode}===true}"/>
+		</semantic:titleCustomTextActions>
+	
+		<Toolbar>
+			<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+			<ToolbarSpacer />
+			<Button 
+				id = "create_button"
+				text = "New tHeader"
+				type = "Emphasized"
+			    press = ".onOpenAddItemDialog"/>
+								 
+			<Button 
+				id = "create_button1"
+				text = "New baseHeader"
+				type = "Emphasized"
+		        press = ".onOpenAddBase_HeaderDialog"/>
+				 
+			<Button 
+				id = "onOpenModelTHeaders"
+				text = "OModel"
+				type = "Emphasized"
+			    press = ".onOpenModel"/>
+								
+		</Toolbar>
+						
+		<IconTabBar
+			id="idIconTabBarNoIcons"
+			expanded="{device>/isNoPhone}"
+			class="sapUiResponsiveContentPadding">
+			<items>
+				<IconTabFilter text="List" key="list">
+					<content>
+						<List>
+							<StandardListItem title="{DocumentNumber}"/>
+							<StandardListItem title="{RegionText}"/>
+							<StandardListItem title="{PlantText}"/>
+							<StandardListItem title="{Description}"/>
+						</List>
+					</content>
+				</IconTabFilter>
+				<IconTabFilter text="Form" key="form">
+				<!--<form:Form>
+					<form:FormContainer title = "Answer">
+							<form:formElements>
+								<form:FormElement label = "Header ID">
+									<form:fields>
+										<Text text="{HeaderID}"/>
+									</form:fields>
+								</form:FormElement>
+							</form:formElements>
+						</form:FormContainer>
+				</form:Form>-->
+					<form:SimpleForm
+					maxContainerCols="2"
+								editable="true"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+						<form:content>
+							<Label text="Header ID"/>
+							<Text text="{HeaderID}"/>
+							<Label text="Document Number"/>
+							<Text text="{DocumentNumber}"/>
+							<Label text="Document Date"/>
+							<Text text="{DocumentDate}"/>
+							<Label text="CreatedBy"/>
+							<Text text="{CreatedBy}"/>
+							<Label text="CreatedByFullName"/>
+							<Text text="{CreatedByFullName}"/>
+							<Label text="Modified"/>
+							<!--<Text text="{path:'Modified',
+										type:'sap.ui.model.type.Date',
+										formatOptions:{
+										pattern:'yyyy-MM-dd',
+										style:'medium'
+										}}"/>-->
+							<Text text="{path:'Modified',
+										formatter:'formatter.dateFormat'}"/>
+							<Label text="ModifiedBy"/>
+							<Text text="{ModifiedBy}"/>
+							<Label text="ModifiedByFullName"/>
+							<Text text="{ModifiedByFullName}"/>
+						</form:content>
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
 	</semantic:SemanticPage>
 
 </mvc:View>
